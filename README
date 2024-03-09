@@ -1,0 +1,47 @@
+Question 1: Explain how FastAPI handles asynchronous requests and its benefits over synchronous code in Python.
+FastAPI leverages Python's async/await syntax and utilizes asynchronous programming techniques to handle incoming HTTP requests asynchronously. Here's how FastAPI handles asynchronous requests and its benefits:
+
+Async/Await Syntax: FastAPI allows you to define asynchronous request handlers using Python's async def syntax. This allows you to write asynchronous code that can await I/O-bound operations without blocking the event loop.
+
+Event Loop: FastAPI runs on top of ASGI (Asynchronous Server Gateway Interface) servers such as Uvicorn and Hypercorn, which utilize event loops to manage asynchronous tasks efficiently. FastAPI's event loop processes incoming requests concurrently, enabling high performance and scalability.
+
+Non-Blocking I/O: FastAPI's asynchronous design enables it to handle multiple requests simultaneously without blocking the execution of other requests. This is particularly beneficial for handling I/O-bound tasks such as network requests or database queries, where the code can await responses without wasting CPU cycles.
+
+Improved Performance: Asynchronous programming in FastAPI improves the overall performance and responsiveness of web applications by maximizing resource utilization and reducing latency. By allowing multiple tasks to execute concurrently, FastAPI can handle a large number of simultaneous connections efficiently.
+
+In summary, FastAPI's support for asynchronous programming enables developers to build highly scalable and performant web applications that can handle large volumes of traffic and concurrent requests effectively.
+
+
+---------------------------------------------------------------------------------
+
+
+Question 2: Describe how dependency injection works in FastAPI and give an example of its practical use.
+Dependency injection in FastAPI allows you to declare dependencies for your request handlers, making it easier to manage and organize your application's logic. Here's how dependency injection works in FastAPI:
+
+Declaration of Dependencies: You can declare dependencies for your request handlers using FastAPI's dependency injection system. Dependencies can be functions, classes, or arbitrary objects that provide the required functionality or resources.
+
+Automatic Dependency Resolution: FastAPI automatically resolves dependencies and injects them into your request handlers when they are invoked. It uses Python's type hints and function signatures to determine the dependencies required by each handler.
+
+Dependency Scopes: FastAPI supports different scopes for dependencies, such as "singleton" (shared across requests) or "request" (scoped to a single request). This allows you to control the lifecycle and behavior of dependencies based on your application's requirements.
+
+Dependency Injection Decorators: FastAPI provides decorators such as Depends to declare dependencies within your request handlers. These decorators allow you to specify the dependencies required by a particular endpoint and ensure that they are resolved before the handler is executed.
+
+
+-------------------------------------------------------------------------------------
+
+Question 3: Code walkthrough
+The provided code demonstrates a basic FastAPI application that manages books and reviews using SQLAlchemy for database integration. Here's a walkthrough of the code:
+
+Database Models: The code defines SQLAlchemy models for books and reviews, including their relationships.
+
+Database Integration: It configures SQLite as the database backend and establishes a connection using SQLAlchemy.
+
+Dependency Injection: The get_db function serves as a dependency to provide a database session to the request handlers.
+
+API Endpoints: The application provides several endpoints to perform CRUD operations on books and reviews. It uses FastAPI's @app.post, @app.get, and other decorators to define the endpoints and their corresponding HTTP methods.
+
+Data Validation: Pydantic models are used for request and response validation. FastAPI automatically validates incoming request payloads against the defined Pydantic models and returns appropriate responses.
+
+Background Task: The create_review endpoint includes a background task to send a confirmation email after a review is posted. FastAPI's BackgroundTasks class is used to enqueue the background task for execution.
+
+Testing: The code includes an example of a test case using FastAPI's test client to test the API endpoints. The test client allows you to simulate HTTP requests and verify the responses returned by the API.
